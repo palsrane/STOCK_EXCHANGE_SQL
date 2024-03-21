@@ -33,6 +33,9 @@ CREATE TABLE deleted_orders (
 )
 
 
+
+
+
 /* CREATE TABLE buyers (
 	order_no INTEGER NOT NULL PRIMARY KEY,
 	order_date DATETIME2 NOT NULL,
