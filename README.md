@@ -7,10 +7,10 @@
  order_no,	order_date,	customer_id,	share_id,	share_count,	per_share_price,	buy_or_sell
 
 -Sample input query is shown at the top of the file.
-  DECLARE @customer_id_n varchar(10) = <username>;
+  DECLARE @customer_id_n varchar(10) = username;
   DECLARE @share_id_n varchar(10) ='SH3' OR 'SH1' OR 'SH2'; --These are the current share id's currently present in the sample orders.csv file, but could be anything
-  DECLARE @share_count_n INTEGER =<enter number of shares>;
-  DECLARE @per_share_price_n money = <enter amount per share>;
+  DECLARE @share_count_n INTEGER = enter number of shares;
+  DECLARE @per_share_price_n money = enter amount per share;
   DECLARE @buy_or_sell_n char ='b' or 's'; --until here the variables are comming from executing the procedure 
 
 -Two tables orders and executed_orders stored non-executed orders and executed orders respectively.
