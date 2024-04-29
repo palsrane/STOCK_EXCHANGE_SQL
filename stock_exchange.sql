@@ -48,15 +48,19 @@ BEGIN
 		PRINT 'Pallavi You are here to BUY Shares Pallavi';
 		SELECT @LookingForBuyerOrSeller ='s';
 		INSERT INTO #tmp_buy_sell 			--temporary table share_id=@share_id_n and per_share_price<=@per_share_price_n ORDER BY per_share_price, order_date; cheapest seller on top
-			SELECT ROW_NUMBER() OVER (ORDER BY per_share_price,order_date),order_no,order_date,customer_id,share_id,share_count,per_share_price FROM dbo.orders 
-			WHERE share_id=@share_id_n AND customer_id <> @customer_id_n AND per_share_price<=@per_share_price_n AND buy_or_sell =  @LookingForBuyerOrSeller --looking for sellers willing to sell at offered or lower cost
+			SELECT ROW_NUMBER() OVER (ORDER BY per_share_price,order_date), --rows are ordered in the ascending share prices with lowest share prices on top
+			order_no,order_date,customer_id,share_id,share_count,per_share_price 
+			FROM dbo.orders 
+			WHERE share_id=@share_id_n AND customer_id <> @customer_id_n AND per_share_price<=@per_share_price_n AND buy_or_sell = @LookingForBuyerOrSeller --looking for sellers willing to sell at offered or lower cost
 			ORDER BY per_share_price,order_date;
 
 	IF @buy_or_sell_n = 's'	
 		PRINT 'Pallavi You are here to SELL Shares Pallavi';
 		SELECT @LookingForBuyerOrSeller ='b';
 		INSERT INTO #tmp_buy_sell 			--temporary table share_id=@share_id_n and per_share_price>=@per_share_price_n ORDER BY per_share_price, order_date; highest paying buyer on top
-			SELECT ROW_NUMBER() OVER (ORDER BY per_share_price DESC,order_date),order_no,order_date,customer_id,share_id,share_count,per_share_price FROM dbo.orders 
+			SELECT ROW_NUMBER() OVER (ORDER BY per_share_price DESC,order_date),--rows are ordered in the descending share prices with highest share prices on top
+			order_no,order_date,customer_id,share_id,share_count,per_share_price 
+			FROM dbo.orders 
 			WHERE share_id=@share_id_n AND customer_id <> @customer_id_n AND per_share_price>=@per_share_price_n AND buy_or_sell =  @LookingForBuyerOrSeller --looking for buyers willing to buy shares at offered or higher cost
 			ORDER BY per_share_price DESC,order_date;
 
