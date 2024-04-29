@@ -1,0 +1,6 @@
+﻿order_no,order_date,customer_id,share_id,share_count,per_share_price,buy_or_sell
+2,40:02.6,ABC1213,SH1,10,50,s
+3,54:44.4,EF1215,SH2,20,5,b
+16,30:41.6,LTJ31,SH2,22,55,b
+18,01:15.2,PSR,SH3,15,10,s
+20,52:54.9,JSK,SH3,5,8,b
